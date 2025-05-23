@@ -11,11 +11,15 @@
 
 cd /opt/ && git clone https://github.com/sudocoinxrpl/trisulca.git
 
-mv sudoku/sudoku/ /opt/
+cp sudoku/trisulca .
 
-mv sudoku/trisulca.bash /opt/
+chmod +x ./trisulca.bash
 
-rm -rf sudoku/sudoku
+# see below for usage most can use something like this:
+#  sudo '/opt/trisulca.bash' --docker-image sudocoin/sudoku:latest '/opt/debian-live-12.10.0-amd64-gnome.iso' --output sudoku-live-25.5.2-amd64-gnome.iso
+
+
+
 
 
 
