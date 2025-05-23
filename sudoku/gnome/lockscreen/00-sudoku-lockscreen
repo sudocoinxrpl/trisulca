@@ -1,0 +1,5 @@
+[org/gnome/desktop/screensaver]
+picture-uri='file:///usr/share/backgrounds/gnome/sudokudelic.svg'
+picture-options='zoom'
+[org/gnome/login-screen]
+logo='/usr/share/backgrounds/gnome/sudokudelic.svg'

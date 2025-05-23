@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Default theme for Sudoku Linux
+Description=A theme for Sudoku Linux
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/sudoku
+ScriptFile=/usr/share/plymouth/themes/sudoku/sudoku.script

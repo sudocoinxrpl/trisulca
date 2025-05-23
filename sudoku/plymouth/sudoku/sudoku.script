@@ -1,0 +1,111 @@
+#!/usr/bin/plymouth
+
+#------------------------------- Globals -------------------------------------------
+prompt_active    = 0
+progress_time    = 0
+progress_pct     = 0
+
+# glow animation params
+refresh_iter     = 0
+anim_iter        = 0
+anim_status      = "stopped"
+NB_REFRESHS_BETWEEN_ANIMS = 5
+NB_ANIM_STEPS             = 50
+
+# text colours
+text_colour.red   = 1.0; text_colour.green = 1.0; text_colour.blue  = 1.0
+action_text_colour.red = 1.0; action_text_colour.green = 1.0; action_text_colour.blue = 1.0
+
+#----------------------------- Screen/window setup ---------------------------
+# full‑screen background image
+bg_img    = Image("sudoku1080.png")
+bg_sprite = Sprite(bg_img)
+bg_sprite.SetPosition(0, 0, -10)
+
+Window.SetBackgroundTopColor    (0,0,0)
+Window.SetBackgroundBottomColor (0,0,0)
+
+# load & center logo
+logo       = Image("logo+sudoku.png")
+gw, gh     = logo.GetWidth(), logo.GetHeight()
+cx         = Window.GetWidth()/2 - gw/2
+cy         = Window.GetHeight()/2 - gh/2
+logo_sprite= Sprite(logo)
+logo_sprite.SetPosition(cx, cy, 0)
+
+# load & position glow
+glow       = Image("glow.png")
+gw, gh     = glow.GetWidth(), glow.GetHeight()
+gx         = Window.GetWidth()/2 - gw/2
+gy         = cy + gh*0.1 - gh/2
+glow_sprite= Sprite()
+glow_sprite.SetImage(glow)
+glow_sprite.SetPosition(gx, gy, -1)
+
+#------------------------------ Text support --------------------------------
+fun DrawText(text, colour, x, y, z) {
+    img    = Image.Text(text, colour.red, colour.green, colour.blue)
+    spr    = Sprite(img)
+    spr.SetPosition(x, y, z)
+    return spr
+}
+
+#---------------------------- Password dialog ------------------------------
+fun display_password_callback(prompt, bullets) {
+    prompt_active = 1
+    # draw prompt
+    pimg = Image.Text(prompt)
+    pspr = Sprite(pimg)
+    px = Window.GetWidth()/2 - pimg.GetWidth()/2
+    py = Window.GetHeight()/2 + gh/2 + 10
+    pspr.SetPosition(px, py, 100)
+    # draw bullets
+    for (i=0; i<bullets; i++) {
+        dot = Image("password_dot.png")
+        dspr= Sprite(dot)
+        dx = px + i*(dot.GetWidth()+2)
+        dy = py + pimg.GetHeight()+5
+        dspr.SetPosition(dx, dy, 100)
+    }
+}
+
+#------------------------- FSCK progress support --------------------------
+fun animate_progress_indicator(time, progress) {
+    progress_time = time
+    progress_pct  = progress
+}
+
+#----------------------------- Callbacks -----------------------------------------
+Plymouth.SetDisplayPasswordFunction(display_password_callback)
+Plymouth.SetBootProgressFunction(animate_progress_indicator)
+
+fun update_glow() {
+    t       = anim_iter / NB_ANIM_STEPS * 2 * Math.Pi
+    opacity = 0.5 + 0.5 * Math.Cos(t)
+    glow_sprite.SetOpacity(opacity)
+    anim_iter++
+    if (anim_iter >= NB_ANIM_STEPS) anim_status="stopped"
+}
+
+fun refresh_cb() {
+    refresh_iter++
+    if (refresh_iter >= NB_REFRESHS_BETWEEN_ANIMS) {
+        refresh_iter = 0
+        if (anim_status == "stopped") {
+            anim_status = "running"
+            anim_iter   = 0
+        }
+        if (anim_status == "running") update_glow()
+    }
+}
+
+Plymouth.SetRefreshFunction(refresh_cb)
+
+fun display_normal_callback() {
+    prompt_active = 0
+}
+
+Plymouth.SetDisplayNormalFunction(display_normal_callback)
+
+fun quit_callback() {}
+Plymouth.SetQuitFunction(quit_callback)

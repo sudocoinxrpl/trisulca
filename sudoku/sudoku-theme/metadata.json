@@ -1,0 +1,13 @@
+{
+    "KPlugin": {
+        "Name": "Sudoku",
+        "Id": "Sudoku",
+        "License": "Humanity",
+        "Authors": [
+            {
+                "Name": "PythonWarrio"
+                
+            }
+        ]
+    }
+}

@@ -1,0 +1,38 @@
+---
+componentName: sudoku
+
+welcomeStyleCalamares: false
+welcomeExpandingLogo: true
+
+windowExpanding: normal
+windowSize: "800px 520px"
+windowPlacement: center
+
+sidebar: widget
+navigation: widget
+
+strings:
+  productName:          "SudokuLinux"
+  shortProductName:     "SudokuLinux"
+  version:              "Limestone"
+  shortVersion:         "Limestone"
+  versionedName:        "SudokuLinux Limestone"
+  shortVersionedName:   "SudokuLinux"
+  bootloaderEntryName:  "SudokuLinux"
+  productUrl:           "https://x.com/sudocoinxrpl"
+  supportUrl:           "https://x.com/sudocoinxrpl"
+  knownIssuesUrl:       "https://x.com/sudocoinxrpl"
+  releaseNotesUrl:      "https://x.com/sudocoinxrpl"
+  donateUrl:            "https://x.com/sudocoinxrpl"
+
+images:
+  productBanner: "logo+sudoku.png"
+
+style:
+  SidebarBackground:        "#292F34"
+  SidebarText:              "#FFFFFF"
+  SidebarBackgroundCurrent: "#D35400"
+  SidebarTextCurrent:       "#292F34"
+
+slideshow:    "show.qml"
+slideshowAPI: 2

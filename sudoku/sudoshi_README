@@ -1,0 +1,10 @@
+# enter-chroot.sh
+
+Bind-mount common pseudo-filesystems into a chroot directory and drop into an interactive shell, then clean up on exit.
+
+---
+
+## Usage
+
+```bash
+sudo ./enter-chroot.sh /path/to/chroot
