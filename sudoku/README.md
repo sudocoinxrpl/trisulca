@@ -6,6 +6,31 @@
 
 
 
+
+## installation
+
+cd /opt/ && git clone https://github.com/sudocoinxrpl/trisulca.git
+
+mv sudoku/sudoku/ /opt/
+
+mv sudoku/trisulca.bash /opt/
+
+rm -rf sudoku/sudoku
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Build a hybrid BIOS+UEFI bootable Debian Live IMG with LVM-backed root, inject C++ toolchain + Secure Boot support + SudokuLinux branding + Calamares customization, and optionally QEMU-test it. Supports session resume via `--workdir` and `--resume`.
 
 ---
